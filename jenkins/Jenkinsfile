@@ -1,23 +1,15 @@
 pipeline {
     agent any
-    tools { 
+	tools { 
         maven 'MAVEN' 
         jdk 'JAVA' 
     }
     stages {
-        stage ('Initialize') {
+        stage('Build') {
             steps {
-                sh '''
-                    echo "PATH = ${PATH}"
-                    echo "M2_HOME = ${M2_HOME}"
-                ''' 
+                sh 'mvn -B -DskipTests clean package'
             }
         }
-
-        stage ('Build') {
-            steps {
-                echo 'This is a minimal pipeline.'
-            }
-        }
+        
     }
 }
